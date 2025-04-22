@@ -11,6 +11,7 @@ package loginregistration;
 import java.util.Scanner;
 public class LoginRegistration {
     
+    //Registers a user by validating their username and password
     public static String registerUser(String username, String password){
         boolean isUsernameValid = checkUsername(username);
         boolean isPasswordValid = checkPasswordComplexity(password);
@@ -26,7 +27,7 @@ public class LoginRegistration {
         }
     }
 
-    // Username formatting
+    // Validates the format of the username.
     public static String validateUsername (String username) {
         if (username.contains ("_") && username.length() <= 5){
             return "Username successfully captured";
@@ -36,7 +37,7 @@ public class LoginRegistration {
         }
     }
    
-    // Password formatting
+    // Validates the complexity of the password.
     public static String validatePassword(String password) {
         boolean hasUppercase = password.matches(".*[A-Z].*");
         boolean hasDigit = password.matches(".*\\d.*");
@@ -50,10 +51,11 @@ public class LoginRegistration {
         }
     }
     
-    //Username
+    //Checks if the username is valid.
     public static boolean checkUsername (String username){
         return username.contains("_") && username.length() <=5;
     }
+    //Checks if the password meets the required complexity.
     public static boolean checkPasswordComplexity (String password){
         boolean hasUppercase = password.matches(".*[A-Z].*");
         boolean hasDigit = password.matches(".*\\d.*");
@@ -64,15 +66,17 @@ public class LoginRegistration {
      
     // Cell phone number check eg +27638227329
     public static boolean checkCellNumber(String phoneNumber){
-        String regex = "^\\+27\\d{1,10}$"; 
+        String regex = "^\\+27\\d{1,10}$"; //// South African phone numbers start with +27 followed by 9 digits
         String digitOnly = phoneNumber.replaceAll("^[\\d]", "");
         return phoneNumber.matches(regex) && digitOnly.length() <=13;
     }
  
+    //Attempts to log in a user by comparing entered credentials with registered ones.
     public static boolean loginUser(String registeredUsername, String registeredPassword, String enteredUsername, String enteredPassword){
         return registeredUsername.equals(enteredUsername) && registeredPassword.equals(enteredPassword);
     }
     
+    //Returns the login status message based on the entered credentials.
     public static String returnLoginStatus(String registeredUsername, String registeredPassword, String enteredUsername, String enteredPassword, String firstname, String lastname){
         if (loginUser(registeredUsername, registeredPassword, enteredUsername, enteredPassword)){
             return "***Login Successful***\nWelcome Back,"+ firstname + " " + lastname + "!";
@@ -81,6 +85,7 @@ public class LoginRegistration {
         }
     }
     
+    //Main method to run the login and registration process.
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         
